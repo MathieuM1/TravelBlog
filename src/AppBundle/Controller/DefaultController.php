@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Categories;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,12 @@ class DefaultController extends Controller
      */
     public function worldTravelAction(Request $request)
     {
-        return $this->render('default/worldTravel.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $articlesWorlds = $em->getRepository('AppBundle:Articles')->findAll();
+
+        return $this->render('default/worldTravel.html.twig', [
+            'articlesWorlds' => $articlesWorlds
+        ]);
     }
 
 
