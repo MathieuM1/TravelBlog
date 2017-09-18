@@ -1,55 +1,61 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/presentation.css') }}" >
+{% endblock %}
 
 {% block body %}
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Autour du monde
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                        <a class="dropdown-item" href="#">USA - West Coast</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        En Europe
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                        <a class="dropdown-item" href="#">Suède - Stockholm</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        En France
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
-                        <a class="dropdown-item" href="#">Sud Ouest - Bordeaux</a>
-                    </div>
-                </li>
-            </ul>
-            <form class="form-inline">
-                <a href="{{ path('fos_user_security_login') }}" class="btn btn-outline-success" type="button">Connexion</a>
-            </form>
-        </div>
-    </nav>
+    {{ parent() }}
     <header>
         <h1>Raccoon traveler</h1>
-        <h2>L'aventure commence ici</h2>
+        <h2>Récits, itinéraires, photographies et autres invitations au Voyage...</h2>
         <div class="buttonScroll"><i class="fa fa-arrow-circle-down scroll" aria-hidden="true"></i></div>
     </header>
-    <div class="presentation">
-        <p>Plop</p>
+    <div class="to-scroll"></div>
+    <div class="container">
+        <div class="last-news">
+            <h3 class="text-center">Derniers articles</h3>
+            <hr class="black-line">
+            <div class="margin-top-lg">
+                {% for articlelast in articlelasts %}
+                    <img src="{{ asset('upload/' ~ articlelast.imgPresentation) }}" class="mx-auto d-block img-article-lg">
+                    <div class="col-lg-12 margin-top-md">
+                        <div>{{ articlelast.name }}</div>
+                        <div>{{ articlelast.content | truncate(400, true, '...') }} lire la suite</div>
+                        <div>{{ articlelast.date|date('d/m/Y') }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row margin-top-md">
+                {% for lastTenArticle in articleslasttens%}
+                    <div class="col-lg-4">
+                        <div class="thumbnails margin-top-md">
+                            <img src="{{ asset('upload/' ~ lastTenArticle.imgPresentation) }}" class="img-article">
+                            <div class="text-thumbnails">
+                                <h4>{{ lastTenArticle.name }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
+    <div class="container-fluid">
+        <div class="presentation margin-top-lg">
+            <div class="row">
+                <div class="col-lg-6">
+                    <p class="margin-top-md">
+                        Hic et ea et. Ut voluptate reprehenderit inventore consequuntur atque. Doloremque velit neque assumenda excepturi veniam. Iste est a nostrum ut.<br/>
+                        Hic amet qui veritatis autem sequi nam rerum sit. Praesentium qui dolor dolorem quis ut. Nihil et fugiat vel sunt maiores mollitia et.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://www.sessions.edu/wp-content/uploads/1-PJgt-UmbqBXXGiDBL1KG0A.jpeg" class="img-presentation margin-top-md">
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 

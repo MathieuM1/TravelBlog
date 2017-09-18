@@ -108,7 +108,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        elseif (0 === strpos($pathinfo, '/a')) {
+        elseif (0 === strpos($pathinfo, '/admin')) {
             // admin
             if ('/admin' === $pathinfo) {
                 return array (  '_controller' => 'AppBundle\\Controller\\AdminController::adminAction',  '_route' => 'admin',);
@@ -176,9 +176,66 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
             }
 
-            // worldTravel
-            if ('/autourdumonde' === $pathinfo) {
-                return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::worldTravelAction',  '_route' => 'worldTravel',);
+            elseif (0 === strpos($pathinfo, '/admin/presentation')) {
+                // presentation_index
+                if ('/admin/presentation' === $trimmedPathinfo) {
+                    if ('GET' !== $canonicalMethod) {
+                        $allow[] = 'GET';
+                        goto not_presentation_index;
+                    }
+
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'presentation_index');
+                    }
+
+                    return array (  '_controller' => 'AppBundle\\Controller\\PresentationController::indexAction',  '_route' => 'presentation_index',);
+                }
+                not_presentation_index:
+
+                // presentation_new
+                if ('/admin/presentation/new' === $pathinfo) {
+                    if (!in_array($canonicalMethod, array('GET', 'POST'))) {
+                        $allow = array_merge($allow, array('GET', 'POST'));
+                        goto not_presentation_new;
+                    }
+
+                    return array (  '_controller' => 'AppBundle\\Controller\\PresentationController::newAction',  '_route' => 'presentation_new',);
+                }
+                not_presentation_new:
+
+                // presentation_show
+                if (preg_match('#^/admin/presentation/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ('GET' !== $canonicalMethod) {
+                        $allow[] = 'GET';
+                        goto not_presentation_show;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'presentation_show')), array (  '_controller' => 'AppBundle\\Controller\\PresentationController::showAction',));
+                }
+                not_presentation_show:
+
+                // presentation_edit
+                if (preg_match('#^/admin/presentation/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    if (!in_array($canonicalMethod, array('GET', 'POST'))) {
+                        $allow = array_merge($allow, array('GET', 'POST'));
+                        goto not_presentation_edit;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'presentation_edit')), array (  '_controller' => 'AppBundle\\Controller\\PresentationController::editAction',));
+                }
+                not_presentation_edit:
+
+                // presentation_delete
+                if (preg_match('#^/admin/presentation/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ('DELETE' !== $canonicalMethod) {
+                        $allow[] = 'DELETE';
+                        goto not_presentation_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'presentation_delete')), array (  '_controller' => 'AppBundle\\Controller\\PresentationController::deleteAction',));
+                }
+                not_presentation_delete:
+
             }
 
         }
@@ -192,7 +249,26 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
         }
 
-        if (0 === strpos($pathinfo, '/login')) {
+        if (0 === strpos($pathinfo, '/westusa')) {
+            // westusa
+            if ('/westusa' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::worldTravelAction',  '_route' => 'westusa',);
+            }
+
+            // west_usa_show
+            if (preg_match('#^/westusa/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ('GET' !== $canonicalMethod) {
+                    $allow[] = 'GET';
+                    goto not_west_usa_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'west_usa_show')), array (  '_controller' => 'AppBundle\\Controller\\DefaultController::westUsaShowAction',));
+            }
+            not_west_usa_show:
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/login')) {
             // fos_user_security_login
             if ('/login' === $pathinfo) {
                 if (!in_array($canonicalMethod, array('GET', 'POST'))) {

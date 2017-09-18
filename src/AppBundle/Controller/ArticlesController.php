@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Articles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Article controller.
@@ -44,6 +45,19 @@ class ArticlesController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // ajout photo
+            $picture = $article->getImgPresentation();
+            if ($picture) {
+                $pictureName = md5(uniqid()).'.'.$picture->guessExtension();
+                $picture->move(
+                    $this->getParameter('upload_directory'),
+                    $pictureName
+                );
+                $article->setImgPresentation($pictureName);
+
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();

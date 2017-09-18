@@ -1,0 +1,39 @@
+header {
+    background: url(../img/header/header1.jpg) no-repeat;
+    background-size: 100%;
+    position: relative;
+    height: 700px;
+}
+
+h1, h2, .buttonScroll, .scroll {
+    font-size: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+
+}
+
+h2 {
+    top: 56%;
+    font-size: 20px;
+}
+
+.buttonScroll {
+    top: 80%;
+    color: white;
+}
+
+.scroll, .scrollWestUSA {
+    cursor: pointer;
+    font-size: 150%;
+}
+
+.scroll:hover {
+    color: #5eb5e0;
+}
+
+.scroll-clicked {
+    color: #5eb5e0;
+}

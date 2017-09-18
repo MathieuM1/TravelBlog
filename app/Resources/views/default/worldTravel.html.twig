@@ -1,8 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>WorldTravel</h1>
+    {{ parent() }}
 
+    <header>
+        <h1>West USA</h1>
+        <h2>Los Angeles, Grand Canyon, San Fransisco etc...</h2>
+        <div class="buttonScroll"><i class="fa fa-arrow-circle-down scrollWestUSA" aria-hidden="true"></i></div>
+    </header>
+
+    <div class="to-scrollWestUSA"></div>
+    <div class="container">
+        <h3 class="text-center">American Dream</h3>
+        <hr class="black-line">
+        <div class="margin-top-md">
+            <div class="row">
+                {% for articleWestUsa in articlesWestUsas %}
+                    <div class="col-lg-6">
+                        <div class="thumbnails-hidden margin-top-md">
+                            <a class="link-article" href="{{ path('west_usa_show', {'id':articleWestUsa.id}) }}">
+                                <img src="{{ asset('upload/' ~ articleWestUsa.imgPresentation) }}" class="img-article-500px img-article">
+                                <div class="text-thumbnails-center">
+                                    <div>{{ articleWestUsa.name }}</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

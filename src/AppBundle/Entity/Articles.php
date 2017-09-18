@@ -44,6 +44,13 @@ class Articles
     /**
      * @var string
      *
+     * @ORM\Column(name="ImgPresentation", type="string", length=255, nullable=true)
+     */
+    private $imgPresentation;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="Autor", type="string", length=255)
      */
     private $autor;
@@ -184,5 +191,29 @@ class Articles
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set imgPresentation
+     *
+     * @param string $imgPresentation
+     *
+     * @return Articles
+     */
+    public function setImgPresentation($imgPresentation)
+    {
+        $this->imgPresentation = $imgPresentation;
+
+        return $this;
+    }
+
+    /**
+     * Get imgPresentation
+     *
+     * @return string
+     */
+    public function getImgPresentation()
+    {
+        return $this->imgPresentation;
     }
 }

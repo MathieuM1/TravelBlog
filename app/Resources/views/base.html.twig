@@ -8,12 +8,56 @@
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
             <link rel="stylesheet" href="{{ asset('css/main.css') }}">
             <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/header.scss') }}">
+            <link rel="stylesheet" href="{{ asset('css/article.css') }}" >
+
         {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">Logo</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href=" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Autour du monde
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                                <a class="dropdown-item" href="{{ path('westusa') }}">USA - West Coast</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                En Europe
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                <a class="dropdown-item" href="#">Suède - Stockholm</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                En France
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+                                <a class="dropdown-item" href="#">Sud Ouest - Bordeaux</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <form class="form-inline">
+                        <a href="{{ path('fos_user_security_login') }}" class="btn btn-outline-success" type="button">Connexion</a>
+                    </form>
+                </div>
+            </nav>
         {% endblock %}
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>

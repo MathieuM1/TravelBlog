@@ -14,6 +14,10 @@ class LoadCategoriesData implements FixtureInterface
         $worldTravel->setTitle('Voyage Monde');
         $manager->persist($worldTravel);
 
+        $westUsa = new Categories();
+        $westUsa->setTitle('West USA');
+        $manager->persist($westUsa);
+
         $ueTravel = new Categories();
         $ueTravel->setTitle('Voyage Europe');
         $manager->persist($ueTravel);
@@ -29,6 +33,10 @@ class LoadCategoriesData implements FixtureInterface
         $tips = new  Categories();
         $tips->setTitle('Bon Plans');
         $manager->persist($tips);
+
+        $presentations = new  Categories();
+        $presentations->setTitle('Présentation');
+        $manager->persist($presentations);
 
         $manager->flush();
 

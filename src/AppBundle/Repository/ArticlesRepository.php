@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * ArticlesRepository
  *
@@ -10,4 +12,31 @@ namespace AppBundle\Repository;
  */
 class ArticlesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByLastNew()
+    {
+        $qb = $this->createQueryBuilder('l')
+            ->orderBy('l.id', 'DESC')
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByLastTen()
+    {
+        $qb = $this->createQueryBuilder('lt')
+            ->orderBy('lt.id', 'DESC')
+            ->setMaxResults(9);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByWestUsa()
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->join('a.category', 'ac', 'WITH', 'ac.id = 29');
+
+        return $qb->getQuery()->getResult();
+    }
+
 }
+

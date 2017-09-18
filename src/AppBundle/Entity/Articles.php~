@@ -44,6 +44,13 @@ class Articles
     /**
      * @var string
      *
+     * @ORM\Column(name="ImgPresentation", type="string", length=255, nullable=true)
+     */
+    private $imgPresentation;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="Autor", type="string", length=255)
      */
     private $autor;
@@ -160,5 +167,29 @@ class Articles
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Categories $category
+     *
+     * @return Articles
+     */
+    public function setCategory(\AppBundle\Entity\Categories $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Categories
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
